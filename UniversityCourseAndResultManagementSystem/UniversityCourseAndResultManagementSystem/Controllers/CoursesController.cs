@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UniversityCourseAndResultManagementSystem.Models;
+using Vereyon.Web;
 
 namespace UniversityCourseAndResultManagementSystem.Controllers
 {
@@ -56,7 +57,8 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             {
                 db.Courses.Add(course);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                FlashMessage.Confirmation("Course saved successfully");
             }
 
             ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", course.DepartmentId);

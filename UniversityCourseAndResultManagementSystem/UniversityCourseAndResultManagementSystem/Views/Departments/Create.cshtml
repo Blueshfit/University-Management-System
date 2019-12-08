@@ -1,4 +1,5 @@
 ﻿@model UniversityCourseAndResultManagementSystem.Models.Department
+@using Vereyon.Web;
 
 @{
     ViewBag.Title = "Create";
@@ -8,10 +9,12 @@
 <h2>Save Department</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
+    @Html.RenderFlashMessages()
+
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -39,10 +42,12 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }
