@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace UniversityCourseAndResultManagementSystem.Models
 {
@@ -24,10 +25,12 @@ namespace UniversityCourseAndResultManagementSystem.Models
         [RegularExpression(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Please enter valid email")]
         [Column(TypeName = "varchar")]
         //[DataType(DataType.EmailAddress)]
+        [Remote("IsEmailExists", "Teachers", ErrorMessage = "Email already exists")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter Contact No.")]
         [Display(Name = "Contact No.")]
+        [Remote("IsContactNoExists", "Teachers", ErrorMessage = "Contact NO. already exists")]
         public string ContactNo { get; set; }
 
         [Display(Name = "Designation")]
@@ -42,7 +45,7 @@ namespace UniversityCourseAndResultManagementSystem.Models
 
         [Display(Name = "Credit to be taken")]
         [Required(ErrorMessage = "Please enter Credit to be taken")]
-        [Range(0, 20)]
+        [Range(0, 1000, ErrorMessage ="Credit must be Non-Negative")]
         public string CreditToBeTaken { get; set; }
     }
 }

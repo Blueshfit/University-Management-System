@@ -59,12 +59,41 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
                 await db.SaveChangesAsync();
                 //return RedirectToAction("Index");
                 FlashMessage.Confirmation("Course saved successfully");
+                return RedirectToAction("Create");
             }
 
             ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", course.DepartmentId);
             ViewBag.SemesterId = new SelectList(db.Semesters, "SemesterId", "SemesterNo", course.SemesterId);
             return View(course);
         }
+
+        // Checking unique Code and Name
+        public JsonResult IsCodeExists(string courseCode)
+        {
+            var courses = db.Courses.ToList();
+            if (!courses.Any(code => code.CourseCode.ToLower() == courseCode.ToLower()))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult IsNameExists(string courseName)
+        {
+            var courses = db.Courses.ToList();
+            if (!courses.Any(name => name.CourseName.ToLower() == courseName.ToLower()))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
         // GET: Courses/Edit/5
         public async Task<ActionResult> Edit(int? id)

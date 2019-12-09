@@ -56,10 +56,43 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
                 await db.SaveChangesAsync();
                 //return RedirectToAction("Index");
                 FlashMessage.Confirmation("Department saved successfully");
+                return RedirectToAction("Create");
             }
 
             return View(department);
         }
+
+        // Checking unique Code and Name
+
+        public JsonResult IsCodeExists(string departmentCode)
+        {
+            var depts = db.Departments.ToList();
+            if (!depts.Any(code => code.DepartmentCode.ToLower() == departmentCode.ToLower()))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult IsNameExists(string departmentName)
+        {
+            var depts = db.Departments.ToList();
+            if (!depts.Any(name => name.DepartmentName.ToLower() == departmentName.ToLower()))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+
 
         // GET: Departments/Edit/5
         public async Task<ActionResult> Edit(int? id)

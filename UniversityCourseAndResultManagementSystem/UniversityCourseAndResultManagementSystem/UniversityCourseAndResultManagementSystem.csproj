@@ -145,6 +145,10 @@
     <Compile Include="Migrations\201912080740250_teacher.designer.cs">
       <DependentUpon>201912080740250_teacher.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912091351264_uniqueIssue%281-4%29.cs" />
+    <Compile Include="Migrations\201912091351264_uniqueIssue%281-4%29.designer.cs">
+      <DependentUpon>201912091351264_uniqueIssue%281-4%29.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
@@ -228,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912080740250_teacher.resx">
       <DependentUpon>201912080740250_teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912091351264_uniqueIssue%281-4%29.resx">
+      <DependentUpon>201912091351264_uniqueIssue%281-4%29.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

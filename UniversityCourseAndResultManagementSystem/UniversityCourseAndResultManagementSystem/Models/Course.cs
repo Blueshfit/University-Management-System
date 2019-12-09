@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace UniversityCourseAndResultManagementSystem.Models
 {
@@ -13,18 +14,20 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public int CourseId { get; set; }
 
         [Required(ErrorMessage = "Please enter course Code")]
-        [MinLength(5, ErrorMessage = "Code must be at least 5 character")]
+        [MinLength(5, ErrorMessage = "Code must be at least 5 character long")]
         [Display(Name = "Code")]
         [Column(TypeName = "varchar")]
+        [Remote("IsCodeExists", "Courses", ErrorMessage = "Course Code already exists")]
         public string CourseCode { get; set; }
 
         [Required(ErrorMessage = "Please enter course Name")]
         [Display(Name = "Name")]
         [Column(TypeName = "varchar")]
+        [Remote("IsNameExists", "Courses", ErrorMessage = "Course Name already exists")]
         public string CourseName { get; set; }
 
         [Required(ErrorMessage = "Please enter Credit")]
-        //[StringLength(5.0, ErrorMessage = "Credit must be in range of 0.5 to 5.0", MinimumLength = 0.5)]
+        [Range(0.5, 5.0, ErrorMessage ="Credit must be in range between 0.5 to 5.0")]
         public float Credit { get; set; }
 
         [DataType(DataType.MultilineText)]

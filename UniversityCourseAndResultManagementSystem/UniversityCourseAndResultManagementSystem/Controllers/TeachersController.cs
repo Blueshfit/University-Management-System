@@ -58,13 +58,45 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
                 db.Teachers.Add(teacher);
                 await db.SaveChangesAsync();
                 //return RedirectToAction("Index");
-                FlashMessage.Confirmation("Teacher saved successfully");
+                FlashMessage.Confirmation("Teacher info saved successfully");
+                return RedirectToAction("Create");
             }
 
             ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", teacher.DepartmentId);
             ViewBag.DesignationId = new SelectList(db.Designations, "DesignationId", "DesignationInfo", teacher.DesignationId);
             return View(teacher);
         }
+
+        // Checking unique Email
+        public JsonResult IsEmailExists(string email)
+        {
+            var emails = db.Teachers.ToList();
+            if (!emails.Any(mail => mail.Email.ToLower() == email.ToLower()))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult IsContactNoExists(string contactNo)
+        {
+            var contacts = db.Teachers.ToList();
+            if (!contacts.Any(contact => contact.ContactNo.ToLower() == contactNo.ToLower()))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+
 
         // GET: Teachers/Edit/5
         public async Task<ActionResult> Edit(int? id)
