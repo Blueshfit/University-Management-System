@@ -43,7 +43,7 @@
                             <li>@Html.ActionLink("View Courses", "Index", "Courses")</li>
                         </ul>
                     </li>
-                    
+
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Teacher
@@ -51,7 +51,18 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Save Teacher", "Create", "Teachers")</li>
-                            <li>@Html.ActionLink(" View Teachers", "Index", "Teachers")</li>
+                            <li>@Html.ActionLink("View Teachers", "Index", "Teachers")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Student
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Register Student", "Create", "Students")</li>
+                            <li>@Html.ActionLink("View Students", "Index", "Students")</li>
                         </ul>
                     </li>
 

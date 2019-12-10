@@ -164,5 +164,12 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //Assigning Courses
+        //public ActionResult AssignCourse()
+        //{
+
+        //}
+
     }
 }
