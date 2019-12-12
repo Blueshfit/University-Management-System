@@ -14,5 +14,8 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public DbSet<Designation> Designations { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Day> Days { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Allocation> Allocations { get; set; }
     }
 }
