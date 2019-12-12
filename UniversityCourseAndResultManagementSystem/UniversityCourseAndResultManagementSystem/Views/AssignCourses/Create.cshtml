@@ -83,7 +83,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Assign" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -95,4 +95,45 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $("#DepartmentId").change(function () {
+                var deptId = $("#DepartmentId").val();
+                var parameter = { departmentId: deptId }
+                $("#TeacherId").empty();
+                $("#TeacherId").append('<option>--Select Teacher--</option>');
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetTeachersByDepartmentId", "Classroom")',
+                    contentType: "application/json; charset= utf-8",
+                    data: JSON.stringify(parameter),
+                    success: function (teacherList) {
+                        $.each(teacherList, function (key, value) {
+                            $("#TeacherId").append('<option value=' + key.TeacherId + '>' + value.TeacherName + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $("#DepartmentId").change(function () {
+                var deptId = $("#DepartmentId").val();
+                var parameter = { departmentId: deptId }
+                $("#CourseId").empty();
+                $("#CourseId").append('<option>--Select Course--</option>');
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCoursesByDepartmentId", "Classroom")',
+                    contentType: "application/json; charset= utf-8",
+                    data: JSON.stringify(parameter),
+                    success: function (courseList) {
+                        $.each(courseList, function (key, value) {
+                            $("#CourseId").append('<option value=' + key.CourseId + '>' + value.CourseName + '</option>');
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
 }
