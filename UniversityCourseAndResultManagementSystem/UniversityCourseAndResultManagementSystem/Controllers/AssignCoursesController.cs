@@ -11,124 +11,125 @@ using UniversityCourseAndResultManagementSystem.Models;
 
 namespace UniversityCourseAndResultManagementSystem.Controllers
 {
-    public class AllocationsController : Controller
+    public class AssignCoursesController : Controller
     {
         private ProjectDbContext db = new ProjectDbContext();
 
-        // GET: Allocations
+        // GET: AssignCourses
         public async Task<ActionResult> Index()
         {
-            var allocations = db.Allocations.Include(a => a.Day).Include(a => a.Room);
-            return View(await allocations.ToListAsync());
+            return View(await db.AssignCourses.ToListAsync());
         }
 
-        // GET: Allocations/Details/5
+        // GET: AssignCourses/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Allocation allocation = await db.Allocations.FindAsync(id);
-            if (allocation == null)
+            AssignCourse assignCourse = await db.AssignCourses.FindAsync(id);
+            if (assignCourse == null)
             {
                 return HttpNotFound();
             }
-            return View(allocation);
+            return View(assignCourse);
         }
 
-        // GET: Allocations/Create
+        // GET: AssignCourses/Create
         public ActionResult Create()
         {
             ViewBag.Departments = db.Departments.ToList();
-            ViewBag.DayId = new SelectList(db.Days, "DayId", "DayName");
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNo");
             return View();
         }
 
-        // POST: Allocations/Create
+        // POST: AssignCourses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Allocation allocation)
+        public async Task<ActionResult> Create([Bind(Include = "AssignId,DepartmentId,TeacherId,CreditToBeTaken,RemainingCredit,CourseId,CourseName,Credit")] AssignCourse assignCourse)
         {
             if (ModelState.IsValid)
             {
-                db.Allocations.Add(allocation);
+                db.AssignCourses.Add(assignCourse);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
             ViewBag.Departments = db.Departments.ToList();
-            ViewBag.DayId = new SelectList(db.Days, "DayId", "DayName", allocation.DayId);
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNo", allocation.RoomId);
-            return View(allocation);
+            return View(assignCourse);
         }
 
-        public JsonResult GetCoursesByDeptId(int departmentId)
+
+        public JsonResult GetTeachersByDepartmentId(int departmentId)
+        {
+            var teachers = db.Teachers.Where(t => t.DepartmentId == departmentId).ToList();
+            return Json(teachers);
+        }
+
+        public JsonResult GetCoursesByDepartmentId(int departmentId)
         {
             var courses = db.Courses.Where(c => c.DepartmentId == departmentId).ToList();
             return Json(courses);
         }
 
-        // GET: Allocations/Edit/5
+
+
+
+        // GET: AssignCourses/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Allocation allocation = await db.Allocations.FindAsync(id);
-            if (allocation == null)
+            AssignCourse assignCourse = await db.AssignCourses.FindAsync(id);
+            if (assignCourse == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DayId = new SelectList(db.Days, "DayId", "DayName", allocation.DayId);
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNo", allocation.RoomId);
-            return View(allocation);
+            return View(assignCourse);
         }
 
-        // POST: Allocations/Edit/5
+        // POST: AssignCourses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "AllocationId,DepartmentId,CourseId,RoomId,DayId,FromTime,ToTime")] Allocation allocation)
+        public async Task<ActionResult> Edit([Bind(Include = "AssignId,DepartmentId,TeacherId,CreditToBeTaken,RemainingCredit,CourseId,CourseName,Credit")] AssignCourse assignCourse)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(allocation).State = EntityState.Modified;
+                db.Entry(assignCourse).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.DayId = new SelectList(db.Days, "DayId", "DayName", allocation.DayId);
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNo", allocation.RoomId);
-            return View(allocation);
+            return View(assignCourse);
         }
 
-        // GET: Allocations/Delete/5
+        // GET: AssignCourses/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Allocation allocation = await db.Allocations.FindAsync(id);
-            if (allocation == null)
+            AssignCourse assignCourse = await db.AssignCourses.FindAsync(id);
+            if (assignCourse == null)
             {
                 return HttpNotFound();
             }
-            return View(allocation);
+            return View(assignCourse);
         }
 
-        // POST: Allocations/Delete/5
+        // POST: AssignCourses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Allocation allocation = await db.Allocations.FindAsync(id);
-            db.Allocations.Remove(allocation);
+            AssignCourse assignCourse = await db.AssignCourses.FindAsync(id);
+            db.AssignCourses.Remove(assignCourse);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
