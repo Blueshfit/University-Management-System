@@ -176,6 +176,10 @@
     <Compile Include="Migrations\201912131849441_nullable.designer.cs">
       <DependentUpon>201912131849441_nullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912140700521_assign1.cs" />
+    <Compile Include="Migrations\201912140700521_assign1.designer.cs">
+      <DependentUpon>201912140700521_assign1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Allocation.cs" />
     <Compile Include="Models\AssignCourse.cs" />
@@ -305,16 +309,16 @@
     <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
-    <Content Include="Views\AssignCourses\Create.cshtml" />
-    <Content Include="Views\AssignCourses\Delete.cshtml" />
-    <Content Include="Views\AssignCourses\Details.cshtml" />
-    <Content Include="Views\AssignCourses\Edit.cshtml" />
-    <Content Include="Views\AssignCourses\Index.cshtml" />
     <Content Include="Views\Allocations\Create.cshtml" />
     <Content Include="Views\Allocations\Delete.cshtml" />
     <Content Include="Views\Allocations\Details.cshtml" />
     <Content Include="Views\Allocations\Edit.cshtml" />
     <Content Include="Views\Allocations\Index.cshtml" />
+    <Content Include="Views\AssignCourses\Create.cshtml" />
+    <Content Include="Views\AssignCourses\Delete.cshtml" />
+    <Content Include="Views\AssignCourses\Details.cshtml" />
+    <Content Include="Views\AssignCourses\Edit.cshtml" />
+    <Content Include="Views\AssignCourses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -359,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912131849441_nullable.resx">
       <DependentUpon>201912131849441_nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912140700521_assign1.resx">
+      <DependentUpon>201912140700521_assign1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

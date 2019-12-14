@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace UniversityCourseAndResultManagementSystem.Models
 {
@@ -18,5 +19,10 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Allocation> Allocations { get; set; }
         public DbSet<AssignCourse> AssignCourses { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 }

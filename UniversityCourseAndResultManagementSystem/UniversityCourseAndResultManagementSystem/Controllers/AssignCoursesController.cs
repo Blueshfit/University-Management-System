@@ -18,7 +18,8 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // GET: AssignCourses
         public async Task<ActionResult> Index()
         {
-            return View(await db.AssignCourses.ToListAsync());
+            var assignCourses = db.AssignCourses.Include(a => a.Course).Include(a => a.Department).Include(a => a.Teacher);
+            return View(await assignCourses.ToListAsync());
         }
 
         // GET: AssignCourses/Details/5
@@ -39,7 +40,9 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // GET: AssignCourses/Create
         public ActionResult Create()
         {
-            ViewBag.Departments = db.Departments.ToList();
+            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode");
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode");
+            ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "TeacherName");
             return View();
         }
 
@@ -48,7 +51,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "AssignId,DepartmentId,TeacherId,CreditToBeTaken,RemainingCredit,CourseId,CourseName,Credit")] AssignCourse assignCourse)
+        public async Task<ActionResult> Create([Bind(Include = "AssignId,DepartmentId,TeacherId,CreditToBeTaken,RemainingCredit,CourseId,CourseName,CourseCredit")] AssignCourse assignCourse)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +60,9 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Departments = db.Departments.ToList();
+            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", assignCourse.CourseId);
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", assignCourse.DepartmentId);
+            ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "TeacherName", assignCourse.TeacherId);
             return View(assignCourse);
         }
 
@@ -74,8 +79,11 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return Json(courses);
         }
 
-
-
+        public JsonResult GetCourseByCourseId(int courseId)
+        {
+            var course = db.Courses.FirstOrDefault(c => c.CourseId == courseId);
+            return Json(course);
+        }
 
         // GET: AssignCourses/Edit/5
         public async Task<ActionResult> Edit(int? id)
@@ -89,6 +97,9 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", assignCourse.CourseId);
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", assignCourse.DepartmentId);
+            ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "TeacherName", assignCourse.TeacherId);
             return View(assignCourse);
         }
 
@@ -97,7 +108,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "AssignId,DepartmentId,TeacherId,CreditToBeTaken,RemainingCredit,CourseId,CourseName,Credit")] AssignCourse assignCourse)
+        public async Task<ActionResult> Edit([Bind(Include = "AssignId,DepartmentId,TeacherId,CreditToBeTaken,RemainingCredit,CourseId,CourseName,CourseCredit")] AssignCourse assignCourse)
         {
             if (ModelState.IsValid)
             {
@@ -105,6 +116,9 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", assignCourse.CourseId);
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", assignCourse.DepartmentId);
+            ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "TeacherName", assignCourse.TeacherId);
             return View(assignCourse);
         }
 
