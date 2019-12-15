@@ -134,6 +134,7 @@
     <Compile Include="Controllers\AssignCoursesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
+    <Compile Include="Controllers\EnrollsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
@@ -180,6 +181,10 @@
     <Compile Include="Migrations\201912140700521_assign1.designer.cs">
       <DependentUpon>201912140700521_assign1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912151630407_enroll.cs" />
+    <Compile Include="Migrations\201912151630407_enroll.designer.cs">
+      <DependentUpon>201912151630407_enroll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Allocation.cs" />
     <Compile Include="Models\AssignCourse.cs" />
@@ -187,6 +192,7 @@
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Designation.cs" />
+    <Compile Include="Models\Enroll.cs" />
     <Compile Include="Models\ProjectDbContext.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Semester.cs" />
@@ -319,6 +325,11 @@
     <Content Include="Views\AssignCourses\Details.cshtml" />
     <Content Include="Views\AssignCourses\Edit.cshtml" />
     <Content Include="Views\AssignCourses\Index.cshtml" />
+    <Content Include="Views\Enrolls\Create.cshtml" />
+    <Content Include="Views\Enrolls\Delete.cshtml" />
+    <Content Include="Views\Enrolls\Details.cshtml" />
+    <Content Include="Views\Enrolls\Edit.cshtml" />
+    <Content Include="Views\Enrolls\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -366,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912140700521_assign1.resx">
       <DependentUpon>201912140700521_assign1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912151630407_enroll.resx">
+      <DependentUpon>201912151630407_enroll.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

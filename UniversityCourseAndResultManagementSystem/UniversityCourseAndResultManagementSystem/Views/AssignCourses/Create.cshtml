@@ -126,7 +126,6 @@
                         });
                     }
                 });
-
             });
 
 
@@ -137,18 +136,15 @@
                 $("#Credit").val("");
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("GetCourseByCourseId", "Ademoes")',
+                    url: '@Url.Action("GetCourseByCourseId", "AssignCourses")',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(parameter),
                     success: function (course) {
-                        //$("#CourseName").val(course.CourseName);
-                        //$("#Credit").val(course.Credit);
                         $("#CourseName").val(course.CourseName);
-                        $("#Credit").val(course.Credit);
+                        $("#Credit").val(course.Course.Credit);
                     }
                 });
             });
-
 
         });
     </script>

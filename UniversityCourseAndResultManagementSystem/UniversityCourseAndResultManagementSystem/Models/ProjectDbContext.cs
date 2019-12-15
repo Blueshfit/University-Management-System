@@ -19,6 +19,7 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Allocation> Allocations { get; set; }
         public DbSet<AssignCourse> AssignCourses { get; set; }
+        public DbSet<Enroll> Enrolls { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
