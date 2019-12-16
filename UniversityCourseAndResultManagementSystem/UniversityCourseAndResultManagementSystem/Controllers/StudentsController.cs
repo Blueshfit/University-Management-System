@@ -58,7 +58,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
                 db.Students.Add(student);
                 await db.SaveChangesAsync();
                 //return RedirectToAction("Index");
-                FlashMessage.Confirmation("Student info saved successfully");
+                FlashMessage.Confirmation("Student registered successfully & the Registration Num is : " + student.RegNo);
                 return RedirectToAction("Create");
             }
 

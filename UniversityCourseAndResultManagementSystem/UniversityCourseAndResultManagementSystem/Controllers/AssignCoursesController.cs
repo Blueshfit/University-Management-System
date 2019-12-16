@@ -81,13 +81,13 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return Json(courses);
         }
 
-        public JsonResult GetTeacherByTeacherId(int teacherId)
+        public JsonResult GetTeacherById(int teacherId)
         {
             var teacher = db.Teachers.FirstOrDefault(t => t.TeacherId == teacherId);
             return Json(teacher);
         }
 
-        public JsonResult GetCourseByCourseId(int courseId)
+        public JsonResult GetCourseById(int courseId)
         {
             var course = db.Courses.FirstOrDefault(c => c.CourseId == courseId);
             return Json(course);

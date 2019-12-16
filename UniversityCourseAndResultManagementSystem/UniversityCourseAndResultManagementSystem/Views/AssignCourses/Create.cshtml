@@ -78,7 +78,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Assign" class="btn btn-default" />
+                <input type="submit" value="Assign" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -133,12 +133,29 @@
             });
 
 
+            $("#TeacherId").change(function () {
+                var id = $("#TeacherId").val();
+                var para = { teacherId: id };
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetTeacherById", "AssignCourses")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(para),
+                    dataType: "json",
+                    success: function (data) {
+                        $("#CreditToBeTaken").val(data.CreditToBeTaken);
+                        $("#RemainingCredit").val(data.RemainingCredit);
+                    }
+                });
+            });
+
+
             $("#CourseId").change(function() {
                 var courseId = $("#CourseId").val();
                 var jsnFormatData = { courseId: courseId };
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("GetCourseByCourseId", "AssignCourses")',
+                    url: '@Url.Action("GetCourseById", "AssignCourses")',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(jsnFormatData),
                     dataType: "json",
@@ -147,14 +164,8 @@
                         $("#Credit").val(data.Credit);
                     }
                 });
-                if (courseId == 0) {
-                    $("#CourseName").val("");
-                    $("#Credit").val("");
-                }
-                return false;
             });
 
-            
 
         });
     </script>
