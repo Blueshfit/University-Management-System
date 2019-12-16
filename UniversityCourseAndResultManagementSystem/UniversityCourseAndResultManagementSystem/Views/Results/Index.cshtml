@@ -1,11 +1,11 @@
-﻿@model IEnumerable<UniversityCourseAndResultManagementSystem.Models.Enroll>
+﻿@model IEnumerable<UniversityCourseAndResultManagementSystem.Models.Result>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>All Enrolled Courses</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -14,6 +14,9 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Course.CourseCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grade.GradeLetter)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Student.StudentName)
@@ -27,9 +30,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Department)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
         <th></th>
     </tr>
 
@@ -37,6 +37,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Course.CourseCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grade.GradeLetter)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Student.StudentName)
@@ -51,12 +54,9 @@
             @Html.DisplayFor(modelItem => item.Department)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EnrollId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EnrollId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EnrollId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResultId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResultId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ResultId })
         </td>
     </tr>
 }

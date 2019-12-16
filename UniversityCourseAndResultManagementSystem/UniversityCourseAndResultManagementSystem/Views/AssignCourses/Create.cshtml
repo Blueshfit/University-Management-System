@@ -1,4 +1,5 @@
 ﻿@model UniversityCourseAndResultManagementSystem.Models.AssignCourse
+@using Vereyon.Web;
 
 @{
     ViewBag.Title = "Create";
@@ -10,10 +11,11 @@
 
 @using (Html.BeginForm())
 {
+    @Html.RenderFlashMessages()
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>AssignCourse</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -50,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CourseId, "Course", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CourseId, "Course Code", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="form-control" id="CourseId" name="CourseId">
                     <option>--Select Course--</option>
@@ -76,15 +78,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Assign" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
 
 
 @section Scripts {
@@ -125,26 +127,34 @@
                             $("#CourseId").append('<option value=' + key.CourseId + '>' + value.CourseName + '</option>');
                         });
                     }
+
+
                 });
             });
 
 
-            $("#CourseId").change(function () {
-                var id = $("#CourseId").val();
-                var parameter = { courseId: id }
-                $("#CourseName").val("");
-                $("#Credit").val("");
+            $("#CourseId").change(function() {
+                var courseId = $("#CourseId").val();
+                var jsnFormatData = { courseId: courseId };
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("GetCourseByCourseId", "AssignCourses")',
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(parameter),
-                    success: function (course) {
-                        $("#CourseName").val(course.CourseName);
-                        $("#Credit").val(course.Course.Credit);
+                    data: JSON.stringify(jsnFormatData),
+                    dataType: "json",
+                    success: function(data) {
+                        $("#CourseName").val(data.CourseName);
+                        $("#Credit").val(data.Credit);
                     }
                 });
+                if (courseId == 0) {
+                    $("#CourseName").val("");
+                    $("#Credit").val("");
+                }
+                return false;
             });
+
+            
 
         });
     </script>

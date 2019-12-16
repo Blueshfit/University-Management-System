@@ -136,6 +136,7 @@
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EnrollsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -185,6 +186,18 @@
     <Compile Include="Migrations\201912151630407_enroll.designer.cs">
       <DependentUpon>201912151630407_enroll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912152220105_studentRegno.cs" />
+    <Compile Include="Migrations\201912152220105_studentRegno.designer.cs">
+      <DependentUpon>201912152220105_studentRegno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912152258480_grade.cs" />
+    <Compile Include="Migrations\201912152258480_grade.designer.cs">
+      <DependentUpon>201912152258480_grade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912160043544_result.cs" />
+    <Compile Include="Migrations\201912160043544_result.designer.cs">
+      <DependentUpon>201912160043544_result.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Allocation.cs" />
     <Compile Include="Models\AssignCourse.cs" />
@@ -193,7 +206,9 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Designation.cs" />
     <Compile Include="Models\Enroll.cs" />
+    <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\ProjectDbContext.cs" />
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Semester.cs" />
     <Compile Include="Models\Student.cs" />
@@ -330,6 +345,12 @@
     <Content Include="Views\Enrolls\Details.cshtml" />
     <Content Include="Views\Enrolls\Edit.cshtml" />
     <Content Include="Views\Enrolls\Index.cshtml" />
+    <Content Include="Views\Results\Create.cshtml" />
+    <Content Include="Views\Results\Delete.cshtml" />
+    <Content Include="Views\Results\Details.cshtml" />
+    <Content Include="Views\Results\Edit.cshtml" />
+    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\Results\ViewResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -380,6 +401,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912151630407_enroll.resx">
       <DependentUpon>201912151630407_enroll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912152220105_studentRegno.resx">
+      <DependentUpon>201912152220105_studentRegno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912152258480_grade.resx">
+      <DependentUpon>201912152258480_grade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912160043544_result.resx">
+      <DependentUpon>201912160043544_result.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

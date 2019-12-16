@@ -50,10 +50,11 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "StudentId,StudentName,Email,ContactNo,RegistrationDate,Address,DepartmentId")] Student student)
+        public async Task<ActionResult> Create([Bind(Include = "StudentId,StudentName,Email,ContactNo,RegistrationDate,Address,DepartmentId,RegNo")] Student student)
         {
             if (ModelState.IsValid)
             {
+                student.RegNo = GenerateRegNo(student);
                 db.Students.Add(student);
                 await db.SaveChangesAsync();
                 //return RedirectToAction("Index");
@@ -63,6 +64,16 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
 
             ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", student.DepartmentId);
             return View(student);
+        }
+
+        private string GenerateRegNo(Student student)
+        {
+            int id = db.Students.Count(s => (s.DepartmentId == student.DepartmentId)
+                                            && (s.RegistrationDate.Year == student.RegistrationDate.Year)) + 1;
+
+            Department department = db.Departments.Where(d => d.DepartmentId == student.DepartmentId).FirstOrDefault();
+            string regNum = department.DepartmentCode + "-" + student.RegistrationDate.Year + "-" + id.ToString("000");
+            return regNum;
         }
 
         //Unique checking
@@ -113,7 +124,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "StudentId,StudentName,Email,ContactNo,RegistrationDate,Address,DepartmentId")] Student student)
+        public async Task<ActionResult> Edit([Bind(Include = "StudentId,StudentName,Email,ContactNo,RegistrationDate,Address,DepartmentId,RegNo")] Student student)
         {
             if (ModelState.IsValid)
             {

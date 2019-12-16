@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UniversityCourseAndResultManagementSystem.Models;
+using Vereyon.Web;
 
 namespace UniversityCourseAndResultManagementSystem.Controllers
 {
@@ -57,7 +58,8 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             {
                 db.AssignCourses.Add(assignCourse);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                FlashMessage.Confirmation("Course assigned to Teacher successfully");
+                return RedirectToAction("Create");
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", assignCourse.CourseId);
@@ -77,6 +79,12 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         {
             var courses = db.Courses.Where(c => c.DepartmentId == departmentId).ToList();
             return Json(courses);
+        }
+
+        public JsonResult GetTeacherByTeacherId(int teacherId)
+        {
+            var teacher = db.Teachers.FirstOrDefault(t => t.TeacherId == teacherId);
+            return Json(teacher);
         }
 
         public JsonResult GetCourseByCourseId(int courseId)
