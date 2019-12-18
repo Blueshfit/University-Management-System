@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,30 +13,28 @@ namespace UniversityCourseAndResultManagementSystem.Models
         [Key]
         public int AssignId { get; set; }
 
+        [Required(ErrorMessage = "Please select any Department")]
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public virtual Department Department { get; set; }
 
+        [Required(ErrorMessage = "Please select Teacher")]
         [Display(Name = "Teacher")]
         public int TeacherId { get; set; }
         public virtual Teacher Teacher { get; set; }
 
+        [DefaultValue(0.0)]
         [Display(Name = "Credit to be taken")]
-        public string CreditToBeTaken { get; set; }
+        public virtual double CreditToBeTaken { get; set; }
 
+        [DefaultValue(0.0)]
         [Display(Name = "Remaining Credit")]
-        public string RemainingCredit { get; set; }
+        public virtual double RemainingCredit { get; set; }
 
+        [Required(ErrorMessage = "Please select any Course")]
         [Display(Name = "Course Code")]
         public int CourseId { get; set; }
         public virtual Course Course { get; set; }
-
-        [Display(Name = "Name")]
-        public string CourseName { get; set; }
-
-        [Display(Name ="Credit")]
-        public string CourseCredit { get; set; }
-
     }
 }

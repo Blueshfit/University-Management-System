@@ -198,6 +198,22 @@
     <Compile Include="Migrations\201912160043544_result.designer.cs">
       <DependentUpon>201912160043544_result.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912161910327_gradeFK.cs" />
+    <Compile Include="Migrations\201912161910327_gradeFK.designer.cs">
+      <DependentUpon>201912161910327_gradeFK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912161917596_gradeFKup.cs" />
+    <Compile Include="Migrations\201912161917596_gradeFKup.designer.cs">
+      <DependentUpon>201912161917596_gradeFKup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912161924443_fkgrade.cs" />
+    <Compile Include="Migrations\201912161924443_fkgrade.designer.cs">
+      <DependentUpon>201912161924443_fkgrade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912181223495_model.cs" />
+    <Compile Include="Migrations\201912181223495_model.designer.cs">
+      <DependentUpon>201912181223495_model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Allocation.cs" />
     <Compile Include="Models\AssignCourse.cs" />
@@ -410,6 +426,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912160043544_result.resx">
       <DependentUpon>201912160043544_result.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912161910327_gradeFK.resx">
+      <DependentUpon>201912161910327_gradeFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912161917596_gradeFKup.resx">
+      <DependentUpon>201912161917596_gradeFKup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912161924443_fkgrade.resx">
+      <DependentUpon>201912161924443_fkgrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912181223495_model.resx">
+      <DependentUpon>201912181223495_model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -142,9 +142,9 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(para),
                     dataType: "json",
-                    success: function (data) {
-                        $("#CreditToBeTaken").val(data.CreditToBeTaken);
-                        $("#RemainingCredit").val(data.RemainingCredit);
+                    success: function (teacher) {
+                        $("#CreditToBeTaken").val(teacher.CreditToBeTaken);
+                        $("#RemainingCredit").val(teacher.RemainingCredit);
                     }
                 });
             });
@@ -159,12 +159,14 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(jsnFormatData),
                     dataType: "json",
-                    success: function(data) {
-                        $("#CourseName").val(data.CourseName);
-                        $("#Credit").val(data.Credit);
+                    success: function(course) {
+                        $("#CourseName").val(course.CourseName);
+                        $("#Credit").val(course.CourseCredit);
                     }
                 });
             });
+
+
 
 
         });

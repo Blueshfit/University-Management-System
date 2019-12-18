@@ -41,5 +41,7 @@ namespace UniversityCourseAndResultManagementSystem.Models
         //[Column(TypeName="time")]
         //[DataType(DataType.Time)]
         public string ToTime { get; set; }
+
+        public string Status { get; set; }
     }
 }

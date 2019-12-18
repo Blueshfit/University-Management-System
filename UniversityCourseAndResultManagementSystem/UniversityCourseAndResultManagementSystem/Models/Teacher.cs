@@ -25,6 +25,7 @@ namespace UniversityCourseAndResultManagementSystem.Models
         [RegularExpression(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Please enter valid email")]
         [Column(TypeName = "varchar")]
         //[DataType(DataType.EmailAddress)]
+        [StringLength(50)]
         [Remote("IsEmailExists", "Teachers", ErrorMessage = "Email already exists")]
         public string Email { get; set; }
 
@@ -33,11 +34,13 @@ namespace UniversityCourseAndResultManagementSystem.Models
         [Remote("IsContactNoExists", "Teachers", ErrorMessage = "Contact NO. already exists")]
         public string ContactNo { get; set; }
 
+        [Required(ErrorMessage = "Please select Designation of the Teacher")]
         [Display(Name = "Designation")]
         public int DesignationId { get; set; }
         [ForeignKey("DesignationId")]
         public virtual Designation Designation { get; set; }
 
+        [Required(ErrorMessage = "Please select any Department")]
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
@@ -45,7 +48,9 @@ namespace UniversityCourseAndResultManagementSystem.Models
 
         [Display(Name = "Credit to be taken")]
         [Required(ErrorMessage = "Please enter Credit to be taken")]
-        [Range(0, 1000, ErrorMessage ="Credit must be Non-Negative")]
-        public string CreditToBeTaken { get; set; }
+        [Range(0, (double)decimal.MaxValue, ErrorMessage ="Credit must be Non-Negative")]
+        public double CreditToBeTaken { get; set; }
+
+        public double RemainingCredit { get; set; }
     }
 }
