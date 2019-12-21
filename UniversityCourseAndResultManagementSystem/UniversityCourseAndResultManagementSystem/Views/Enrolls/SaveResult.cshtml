@@ -1,0 +1,151 @@
+﻿@model UniversityCourseAndResultManagementSystem.Models.Enroll
+
+@{
+    ViewBag.Title = "SaveResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Save Result</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EnrollId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentId, "Student Reg No.", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="RegNo" name="RegNo">
+                    <option>--Select Student--</option>
+                    @foreach (var student in ViewBag.StudentList)
+                    {
+                        <option value="@student.RegNo">@student.RegNo</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("StudentName", null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Email", null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Department", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Department", null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseId, "Select Course", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("CourseId", null, "--Select Course--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })*@
+                <select class="form-control" id="CourseId" name="CourseId">
+                    <option>--Select Course--</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GradeLetter, "Select Grade Letter", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="GradeLetter" id="GradeLetter" class="form-control">
+                    <option value="">--select Grade Letter--</option>
+                    @foreach (var grade in ViewBag.GradeList)
+                    {
+                        <option value=@grade.GradeLetter>@grade.GradeLetter</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#RegNo").change(function() {
+                var regNo = $("#RegistrationId").val();
+                var jsnFormatData = { regNo: regNo };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetStudentById", "EnrollCourse")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(jsnFormatData),
+                    dataType: "json",
+                    success: function(data) {
+                        $.each(data,
+                            function(key, value) {
+
+                                $("#name").val(value.StudentName);
+                                $("#email").val(value.Email);
+                                $("#department").val(value.d.DepartmentName);
+
+
+                                $("#CourseId").empty();
+                                $("#CourseId").append('<option value=' + "" + '>' + "--Select Course--" + '</option>');
+                                var jsnData = { regNo: regNo };
+                                $.ajax({
+                                    type: "POST",
+                                    url: '@Url.Action("GetCoursesbyRegNo", "EnrollCourse")',
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify(jsnData),
+                                    dataType: "json",
+                                    success: function(dataa) {
+                                        $.each(dataa,
+                                            function(key1, value1) {
+                                                //alert(value1.CourseId + " " + value1.CourseCode);
+                                                $("#CourseId").append('<option value=' +
+                                                    value1.CourseId +
+                                                    '>' +
+                                                    value1.Course.CourseCode +
+                                                    '</option>');
+                                            });
+                                    }
+                                });
+                            });
+                    }
+                });
+
+                return false;
+            });
+
+
+        });
+    </script>
+}

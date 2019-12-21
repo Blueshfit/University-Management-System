@@ -13,12 +13,12 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public int AllocationId { get; set; }
 
         [Display(Name = "Department")]
-        public int? DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
 
         [Display(Name = "Course")]
-        public int? CourseId { get; set; }
+        public int CourseId { get; set; }
         [ForeignKey("CourseId")]
         public Course Course { get; set; }
 
@@ -41,7 +41,5 @@ namespace UniversityCourseAndResultManagementSystem.Models
         //[Column(TypeName="time")]
         //[DataType(DataType.Time)]
         public string ToTime { get; set; }
-
-        public string Status { get; set; }
     }
 }

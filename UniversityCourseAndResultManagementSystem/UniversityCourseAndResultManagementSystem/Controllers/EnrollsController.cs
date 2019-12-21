@@ -23,20 +23,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return View(await enrolls.ToListAsync());
         }
 
-        // GET: Enrolls/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Enroll enroll = await db.Enrolls.FindAsync(id);
-            if (enroll == null)
-            {
-                return HttpNotFound();
-            }
-            return View(enroll);
-        }
+        
 
         // GET: Enrolls/Create
         public ActionResult Create()
@@ -51,10 +38,16 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Enroll enroll)
+        public async Task<ActionResult> Create([Bind(Include = "EnrollId,StudentId,StudentName,Email,Department,CourseId,Date")] Enroll enroll)
         {
             if (ModelState.IsValid)
             {
+                if (IsEnrolled(enroll))
+                {
+                    FlashMessage.Danger("Course Already enrolled");
+                    return RedirectToAction("Create");
+                }
+
                 db.Enrolls.Add(enroll);
                 await db.SaveChangesAsync();
                 FlashMessage.Confirmation("Course enrolled successfully");
@@ -64,6 +57,17 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", enroll.CourseId);
             ViewBag.StudentId = new SelectList(db.Students, "StudentId", "RegNo", enroll.StudentId);
             return View(enroll);
+        }
+
+
+        public bool IsEnrolled(Enroll enroll)
+        {
+            var enrolledCourses = db.Enrolls.ToList();
+            
+            if(enrolledCourses.Any(c => c.CourseId.ToString() == enroll.CourseId.ToString())){
+                return true;
+            }
+            return false;
         }
 
         public JsonResult GetStudentByStudentId(int studentId)
@@ -78,41 +82,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return Json(courses);
         }
 
-        // GET: Enrolls/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Enroll enroll = await db.Enrolls.FindAsync(id);
-            if (enroll == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", enroll.CourseId);
-            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "RegNo", enroll.StudentId);
-            return View(enroll);
-        }
-
-        // POST: Enrolls/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Enroll enroll)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(enroll).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", enroll.CourseId);
-            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "RegNo", enroll.StudentId);
-            return View(enroll);
-        }
-
+        
         // GET: Enrolls/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {

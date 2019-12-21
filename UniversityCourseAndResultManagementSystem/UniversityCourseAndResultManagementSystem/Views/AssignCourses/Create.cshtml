@@ -109,7 +109,7 @@
                     data: JSON.stringify(parameter),
                     success: function (teacherList) {
                         $.each(teacherList, function (key, value) {
-                            $("#TeacherId").append('<option value=' + key.TeacherId + '>' + value.TeacherName + '</option>');
+                            $("#TeacherId").append('<option value=' + value.TeacherId + '>' + value.TeacherName + '</option>');
                         });
                     }
                 });
@@ -124,7 +124,7 @@
                     data: JSON.stringify(parameter),
                     success: function (courseList) {
                         $.each(courseList, function (key, value) {
-                            $("#CourseId").append('<option value=' + key.CourseId + '>' + value.CourseName + '</option>');
+                            $("#CourseId").append('<option value=' + value.CourseId + '>' + value.CourseCode + '</option>');
                         });
                     }
 
@@ -142,9 +142,9 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(para),
                     dataType: "json",
-                    success: function (teacher) {
-                        $("#CreditToBeTaken").val(teacher.CreditToBeTaken);
-                        $("#RemainingCredit").val(teacher.RemainingCredit);
+                    success: function (data) {
+                        $("#CreditToBeTaken").val(data.CreditToBeTaken);
+                        $("#RemainingCredit").val(data.RemainingCredit);
                     }
                 });
             });
@@ -159,14 +159,12 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(jsnFormatData),
                     dataType: "json",
-                    success: function(course) {
-                        $("#CourseName").val(course.CourseName);
-                        $("#Credit").val(course.CourseCredit);
+                    success: function(data) {
+                        $("#CourseName").val(data.CourseName);
+                        $("#CourseCredit").val(data.Credit);
                     }
                 });
             });
-
-
 
 
         });

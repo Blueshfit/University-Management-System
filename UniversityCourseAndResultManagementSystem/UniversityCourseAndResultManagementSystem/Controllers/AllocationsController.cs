@@ -22,20 +22,6 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return View(await allocations.ToListAsync());
         }
 
-        // GET: Allocations/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Allocation allocation = await db.Allocations.FindAsync(id);
-            if (allocation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(allocation);
-        }
 
         // GET: Allocations/Create
         public ActionResult Create()
@@ -73,44 +59,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         }
 
 
-        // GET: Allocations/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Allocation allocation = await db.Allocations.FindAsync(id);
-            if (allocation == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", allocation.CourseId);
-            ViewBag.DayId = new SelectList(db.Days, "DayId", "DayName", allocation.DayId);
-            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", allocation.DepartmentId);
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNo", allocation.RoomId);
-            return View(allocation);
-        }
-
-        // POST: Allocations/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "AllocationId,DepartmentId,CourseId,RoomId,DayId,FromTime,ToTime")] Allocation allocation)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(allocation).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", allocation.CourseId);
-            ViewBag.DayId = new SelectList(db.Days, "DayId", "DayName", allocation.DayId);
-            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", allocation.DepartmentId);
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNo", allocation.RoomId);
-            return View(allocation);
-        }
+       
 
         // GET: Allocations/Delete/5
         public async Task<ActionResult> Delete(int? id)

@@ -23,20 +23,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return View(await results.ToListAsync());
         }
 
-        // GET: Results/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Result result = await db.Results.FindAsync(id);
-            if (result == null)
-            {
-                return HttpNotFound();
-            }
-            return View(result);
-        }
+        
 
         // GET: Results/Create
         public ActionResult Create()
@@ -56,6 +43,12 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (IsGraded(result))
+                {
+                    FlashMessage.Danger("Student is Already graded");
+                    return RedirectToAction("Create");
+                }
+
                 db.Results.Add(result);
                 await db.SaveChangesAsync();
                 FlashMessage.Confirmation("Student result saved successfully");
@@ -66,6 +59,17 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             ViewBag.GradeId = new SelectList(db.Grades, "GradeId", "GradeLetter", result.GradeId);
             ViewBag.StudentId = new SelectList(db.Students, "StudentId", "RegNo", result.StudentId);
             return View(result);
+        }
+
+        public bool IsGraded(Result result)
+        {
+            var gradedCourses = db.Results.ToList();
+
+            if (gradedCourses.Any(c => c.CourseId.ToString() == result.CourseId.ToString()))
+            {
+                return true;
+            }
+            return false;
         }
 
         public ActionResult ViewResult()
@@ -86,43 +90,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return Json(courses);
         }
 
-
-        // GET: Results/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Result result = await db.Results.FindAsync(id);
-            if (result == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", result.CourseId);
-            ViewBag.GradeId = new SelectList(db.Grades, "GradeId", "GradeLetter", result.GradeId);
-            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "StudentName", result.StudentId);
-            return View(result);
-        }
-
-        // POST: Results/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ResultId,StudentId,StudentName,Email,Department,CourseId,GradeId")] Result result)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(result).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", result.CourseId);
-            ViewBag.GradeId = new SelectList(db.Grades, "GradeId", "GradeLetter", result.GradeId);
-            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "StudentName", result.StudentId);
-            return View(result);
-        }
+        
 
         // GET: Results/Delete/5
         public async Task<ActionResult> Delete(int? id)

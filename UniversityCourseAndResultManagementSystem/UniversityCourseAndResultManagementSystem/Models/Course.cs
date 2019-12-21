@@ -28,24 +28,19 @@ namespace UniversityCourseAndResultManagementSystem.Models
 
         [Required(ErrorMessage = "Please enter Credit")]
         [Range(0.5, 5.0, ErrorMessage ="Credit must be in range between 0.5 to 5.0")]
-        public double Credit { get; set; }
+        public float Credit { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Required(ErrorMessage ="Please select any Department")]
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public virtual Department Department { get; set; }
 
-        [Required(ErrorMessage = "Please select a Semester")]
         [Display(Name = "Semester")]
         public int SemesterId { get; set; }
         [ForeignKey("SemesterId")]
         public virtual Semester Semester { get; set; }
-
-        public virtual String AssignTo { get; set; }
-        public bool Status { get; set; }
     }
 }

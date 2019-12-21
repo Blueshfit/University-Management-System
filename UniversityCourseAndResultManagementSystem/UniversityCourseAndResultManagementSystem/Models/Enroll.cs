@@ -17,19 +17,19 @@ namespace UniversityCourseAndResultManagementSystem.Models
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
 
-        [Required(ErrorMessage = "Please select a Course")]
+        [Display(Name = "Name")]
+        public string StudentName { get; set; }
+
+        public string Email { get; set; }
+
+        public string Department { get; set; }
+
+        [Required(ErrorMessage ="Please select a Course")]
         [Display(Name = "Course")]
         public int CourseId { get; set; }
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
 
-        [Required]
-        [Display(Name ="Date")]
-        [DataType(DataType.DateTime)]
-        public DateTime EnrollDate { get; set; }
-
-        public virtual string GradeLetter { set; get; }
-        public bool IsEnroll { get; set; }
-
+        public DateTime Date { get; set; }
     }
 }

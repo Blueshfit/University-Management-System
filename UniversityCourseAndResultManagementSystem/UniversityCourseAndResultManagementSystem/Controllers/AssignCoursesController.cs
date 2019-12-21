@@ -52,7 +52,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(AssignCourse assignCourse)
+        public async Task<ActionResult> Create([Bind(Include = "AssignId,DepartmentId,TeacherId,CreditToBeTaken,RemainingCredit,CourseId,CourseName,CourseCredit")] AssignCourse assignCourse)
         {
             if (ModelState.IsValid)
             {
@@ -93,42 +93,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return Json(course);
         }
 
-        // GET: AssignCourses/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AssignCourse assignCourse = await db.AssignCourses.FindAsync(id);
-            if (assignCourse == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", assignCourse.CourseId);
-            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", assignCourse.DepartmentId);
-            ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "TeacherName", assignCourse.TeacherId);
-            return View(assignCourse);
-        }
-
-        // POST: AssignCourses/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(AssignCourse assignCourse)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(assignCourse).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseCode", assignCourse.CourseId);
-            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", assignCourse.DepartmentId);
-            ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "TeacherName", assignCourse.TeacherId);
-            return View(assignCourse);
-        }
+        
 
         // GET: AssignCourses/Delete/5
         public async Task<ActionResult> Delete(int? id)
