@@ -8,91 +8,325 @@
 
 <h2>Course Assign to Teacher</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.RenderFlashMessages()
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DepartmentId", null, "--Select Department--", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TeacherId, "Teacher", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="form-control" id="TeacherId" name="TeacherId">
-                    <option>--Select Teacher--</option>
-                </select>
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DepartmentId)
+        @Html.DropDownList("DepartmentId", null, "--Select Department--", htmlAttributes: new { @class = "form-control" })
+        @* @Html.ValidationMessage("DeptErrorLabel", "", new { @class = "text-danger" })*@
+        <label id="DeptErrorLabel" style="color: red;"></label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TeacherId, "Teacher", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select class="form-control" id="TeacherId" name="TeacherId">
+                <option>--Select Teacher--</option>
+            </select>
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreditToBeTaken, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreditToBeTaken, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.CreditToBeTaken, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreditToBeTaken)
+        @Html.EditorFor(model => model.CreditToBeTaken, new { htmlAttributes = new { @class = "form-control" } })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RemainingCredit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RemainingCredit, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.RemainingCredit, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseId, "Course Code", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="form-control" id="CourseId" name="CourseId">
-                    <option>--Select Course--</option>
-                </select>
-            </div>
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.RemainingCredit)
+        @Html.EditorFor(model => model.RemainingCredit, new { htmlAttributes = new { @class = "form-control" } })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseCredit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseCredit, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.CourseCredit, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CourseId)
+        <select class="form-control" id="CourseId" name="CourseId"></select>
+        @*  @Html.ValidationMessage("CourseErrorLabel", "", new { @class = "text-danger" })*@
+        <label id="CourseErrorLabel" style="color: red;"></label>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Assign" class="btn btn-primary" />
-            </div>
-        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("CourseName")
+        @Html.Editor("CourseName", new { htmlAttributes = new { @class = "form-control" } })
+
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Credit")
+        @Html.Editor("Credit", new { htmlAttributes = new { @class = "form-control" } })
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Assign" class="btn btn-primary" id="Submit" />
     </div>
 }
 
-@*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
+@*@using (Html.BeginForm())
+    {
+        @Html.RenderFlashMessages()
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DepartmentId", null, "--Select Department--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TeacherId, "Teacher", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="form-control" id="TeacherId" name="TeacherId">
+                        <option>--Select Teacher--</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreditToBeTaken, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreditToBeTaken, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.CreditToBeTaken, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RemainingCredit, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RemainingCredit, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.RemainingCredit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CourseId, "Course Code", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="form-control" id="CourseId" name="CourseId">
+                        <option>--Select Course--</option>
+                    </select>
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.Label("CourseName")
+                @Html.Editor("CourseName", new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Credit")
+                @Html.Editor("Credit", new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CourseCredit, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CourseCredit, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.CourseCredit, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Assign" class="btn btn-primary" />
+    </div>
+</div>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+    
     <script>
+    $(document).ready(function() {
+
+        $("#DepartmentId").change(function () {
+            ResetLabel();
+            var departmentId = $("#DepartmentId").val();
+            var jsnFormatData = { deptId: departmentId };
+            $("#TeacherId").empty();
+            $("#TeacherId").append('<option value=0>Select Teacher</option>');
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetTeachersByDeptId", "AssignCourse")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(jsnFormatData),
+                dataType: "json",
+                success: function(data) {
+
+                    $.each(data, function(key, value) {
+                        $("#TeacherId").append('<option value=' + value.TeacherId + '>' + value.TeacherName + '</option>');
+                    });
+                }
+            });
+
+            $("#CourseId").empty();
+            $("#CourseId").append('<option value=0>Select Course Code</option>');
+            jsnFormatData = { deptId: departmentId };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCoursesByDeptId", "AssignCourse")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(jsnFormatData),
+                dataType: "json",
+                success: function(dataa) {
+
+                    $.each(dataa, function(key1, value1) {
+                        $("#CourseId").append('<option value=' + value1.CourseId + '>' + value1.CourseCode + '</option>');
+                    });
+                }
+            });
+            return false;
+        });
+
+        $("#TeacherId").change(function () {
+            var teacherId = $("#TeacherId").val();
+            var jsnFormatData = { teacherId: teacherId };
+            $("#TeacherId").empty();
+            $("#TeacherId").append('<option>--Select Teacher--</option>');
+
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetTeachersByDepartmentId", "AssignCourses")',
+                contentType: "application/json; charset= utf-8",
+                data: JSON.stringify(parameter),
+                success: function (teacherList) {
+                    $.each(teacherList, function (key, value) {
+                        $("#TeacherId").append('<option value=' + key.TeacherId + '>' + value.TeacherName + '</option>');
+                    });
+                }
+            });
+
+        $("#CourseId").change(function() {
+            var courseId = $("#CourseId").val();
+            var jsnFormatData = { courseId: courseId };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCourseById", "AssignCourse")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(jsnFormatData),
+                dataType: "json",
+                success: function(data) {
+                    $("#CourseName").val(data.CourseName);
+                    $("#Credit").val(data.Credit);
+                }
+            });
+            if (courseId == 0) {
+                $("#CourseName").val("");
+                $("#Credit").val("");
+            }
+            return false;
+        });
+
+        $("#Submit").click(function () {
+            var errorValue = 0;
+            var departmentId = $("#DepartmentId").val();
+
+            if (departmentId == 0) {
+                $("#DeptErrorLabel").text("Select One Department!");
+                errorValue = 1;
+            }
+
+            var teacherId = $("#TeacherId").val();
+
+            if (teacherId == 0) {
+                $("#TeacherErrorLabel").text("Select One Teacher!");
+                errorValue = 1;
+            }
+
+            var courseId = $("#CourseId").val();
+            if (courseId == 0) {
+                $("#CourseErrorLabel").text("Select One Course!");
+                errorValue = 1;
+            }
+            if (errorValue == 1) {
+                return false;
+            } else {
+
+                var remCr = $("#RemainingCredit").val() - $("#Credit").val();
+                var r = false;
+                if (remCr < 0) {                  
+                  r = confirm("The Teacher has alreay too many Credits. Do You assign More...");
+                }
+                if (r == true || remCr > 0 || remCr==0) {
+                    
+                    var tC = $("#CreditToBeTaken").val();
+
+                    var jsnFormatData = { DepartmentId: departmentId, TeacherId: teacherId, CourseId: courseId, CreditToBeTaken: tC, RemainingCredit: remCr };
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("SaveAssignCourse", "AssignCourse")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(jsnFormatData),
+                        dataType: "json",
+                        success: function(data) {
+
+                            if (data == true)
+                               // alert("Successfully Assigned");
+                                $.alert({
+                                   title: 'Conframation!',
+                                   content: 'Successfully Assigned!',
+                                });
+                            else {
+                                $.alert({
+                                    title: 'Alert!',
+                                    content: 'Course is already Assigned',
+                                });
+                                //alert("Course is already Assigned");
+                            }
+                            Reset();
+                        }
+                    });
+
+                }
+                    return false;
+                }
+
+            });
+            return false;
+    });
+
+        function Reset() {
+            $("#RemainingCredit").val("");
+            $("#CreditToBeTaken").val("");
+            $("#CourseId").empty();
+            $("#TeacherId").empty();
+            $("#CourseName").val("");
+            $("#Credit").val("");
+            $("#DepartmentId").prop("selectedIndex", 0);
+        }
+    function ResetLabel() {
+        $("#DeptErrorLabel").text("");
+        $("#TeacherErrorLabel").text("");
+        $("#CourseErrorLabel").text("");
+    }
+
+</script>
+
+    @*<script>
         $(document).ready(function () {
             $("#DepartmentId").change(function () {
                 var deptId = $("#DepartmentId").val();
@@ -164,11 +398,95 @@
                         $("#Credit").val(course.CourseCredit);
                     }
                 });
+                if (courseId == 0) {
+                $("#CourseName").val("");
+                $("#Credit").val("");
+            }
+            return false;
+
             });
 
+            $("#Submit").click(function () {
+            var errorValue = 0;
+            var departmentId = $("#DepartmentId").val();
 
+            if (departmentId == 0) {
+                $("#DeptErrorLabel").text("Select One Department!");
+                errorValue = 1;
+            }
 
+            var teacherId = $("#TeacherId").val();
 
+            if (teacherId == 0) {
+                $("#TeacherErrorLabel").text("Select One Teacher!");
+                errorValue = 1;
+            }
+
+            var courseId = $("#CourseId").val();
+            if (courseId == 0) {
+                $("#CourseErrorLabel").text("Select One Course!");
+                errorValue = 1;
+            }
+            if (errorValue == 1) {
+                return false;
+            } else {
+
+                var remCr = $("#RemainingCredit").val() - $("#Credit").val();
+                var r = false;
+                if (remCr < 0) {
+                  r = confirm("The Teacher has alreay too many Credits. Do You assign More...");
+                }
+                if (r == true || remCr > 0 || remCr==0) {
+
+                    var tC = $("#CreditToBeTaken").val();
+
+                    var jsnFormatData = { DepartmentId: departmentId, TeacherId: teacherId, CourseId: courseId, CreditToBeTaken: tC, RemainingCredit: remCr };
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("SaveAssignCourse", "AssignCourse")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(jsnFormatData),
+                        dataType: "json",
+                        success: function(data) {
+
+                            if (data == true)
+                               // alert("Successfully Assigned");
+                                $.alert({
+                                   title: 'Conframation!',
+                                   content: 'Successfully Assigned!',
+                                });
+                            else {
+                                $.alert({
+                                    title: 'Alert!',
+                                    content: 'Course is already Assigned',
+                                });
+                                //alert("Course is already Assigned");
+                            }
+                            Reset();
+                        }
+                    });
+
+                }
+                    return false;
+                }
+
+            });
+            return false;
         });
-    </script>
+
+        function Reset() {
+            $("#RemainingCredit").val("");
+            $("#CreditToBeTaken").val("");
+            $("#CourseId").empty();
+            $("#TeacherId").empty();
+            $("#CourseName").val("");
+            $("#Credit").val("");
+            $("#DepartmentId").prop("selectedIndex", 0);
+        }
+        function ResetLabel() {
+            $("#DeptErrorLabel").text("");
+            $("#TeacherErrorLabel").text("");
+            $("#CourseErrorLabel").text("");
+        }
+    </script>*@
 }

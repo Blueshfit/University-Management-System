@@ -142,77 +142,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912080706461_first3stories.cs" />
-    <Compile Include="Migrations\201912080706461_first3stories.designer.cs">
-      <DependentUpon>201912080706461_first3stories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912080740250_teacher.cs" />
-    <Compile Include="Migrations\201912080740250_teacher.designer.cs">
-      <DependentUpon>201912080740250_teacher.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912091351264_uniqueIssue%281-4%29.cs" />
-    <Compile Include="Migrations\201912091351264_uniqueIssue%281-4%29.designer.cs">
-      <DependentUpon>201912091351264_uniqueIssue%281-4%29.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912101755520_student.cs" />
-    <Compile Include="Migrations\201912101755520_student.designer.cs">
-      <DependentUpon>201912101755520_student.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912120838059_allocation.cs" />
-    <Compile Include="Migrations\201912120838059_allocation.designer.cs">
-      <DependentUpon>201912120838059_allocation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912120846119_allocation-course.cs" />
-    <Compile Include="Migrations\201912120846119_allocation-course.designer.cs">
-      <DependentUpon>201912120846119_allocation-course.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912121849015_assign.cs" />
-    <Compile Include="Migrations\201912121849015_assign.designer.cs">
-      <DependentUpon>201912121849015_assign.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912131835259_allocUp.cs" />
-    <Compile Include="Migrations\201912131835259_allocUp.designer.cs">
-      <DependentUpon>201912131835259_allocUp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912131849441_nullable.cs" />
-    <Compile Include="Migrations\201912131849441_nullable.designer.cs">
-      <DependentUpon>201912131849441_nullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912140700521_assign1.cs" />
-    <Compile Include="Migrations\201912140700521_assign1.designer.cs">
-      <DependentUpon>201912140700521_assign1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912151630407_enroll.cs" />
-    <Compile Include="Migrations\201912151630407_enroll.designer.cs">
-      <DependentUpon>201912151630407_enroll.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912152220105_studentRegno.cs" />
-    <Compile Include="Migrations\201912152220105_studentRegno.designer.cs">
-      <DependentUpon>201912152220105_studentRegno.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912152258480_grade.cs" />
-    <Compile Include="Migrations\201912152258480_grade.designer.cs">
-      <DependentUpon>201912152258480_grade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912160043544_result.cs" />
-    <Compile Include="Migrations\201912160043544_result.designer.cs">
-      <DependentUpon>201912160043544_result.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912161910327_gradeFK.cs" />
-    <Compile Include="Migrations\201912161910327_gradeFK.designer.cs">
-      <DependentUpon>201912161910327_gradeFK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912161917596_gradeFKup.cs" />
-    <Compile Include="Migrations\201912161917596_gradeFKup.designer.cs">
-      <DependentUpon>201912161917596_gradeFKup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912161924443_fkgrade.cs" />
-    <Compile Include="Migrations\201912161924443_fkgrade.designer.cs">
-      <DependentUpon>201912161924443_fkgrade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912181223495_model.cs" />
-    <Compile Include="Migrations\201912181223495_model.designer.cs">
-      <DependentUpon>201912181223495_model.cs</DependentUpon>
+    <Compile Include="Migrations\201912191808048_assign.cs" />
+    <Compile Include="Migrations\201912191808048_assign.designer.cs">
+      <DependentUpon>201912191808048_assign.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Allocation.cs" />
@@ -385,59 +317,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912080706461_first3stories.resx">
-      <DependentUpon>201912080706461_first3stories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912080740250_teacher.resx">
-      <DependentUpon>201912080740250_teacher.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912091351264_uniqueIssue%281-4%29.resx">
-      <DependentUpon>201912091351264_uniqueIssue%281-4%29.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912101755520_student.resx">
-      <DependentUpon>201912101755520_student.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912120838059_allocation.resx">
-      <DependentUpon>201912120838059_allocation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912120846119_allocation-course.resx">
-      <DependentUpon>201912120846119_allocation-course.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912121849015_assign.resx">
-      <DependentUpon>201912121849015_assign.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912131835259_allocUp.resx">
-      <DependentUpon>201912131835259_allocUp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912131849441_nullable.resx">
-      <DependentUpon>201912131849441_nullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912140700521_assign1.resx">
-      <DependentUpon>201912140700521_assign1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912151630407_enroll.resx">
-      <DependentUpon>201912151630407_enroll.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912152220105_studentRegno.resx">
-      <DependentUpon>201912152220105_studentRegno.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912152258480_grade.resx">
-      <DependentUpon>201912152258480_grade.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912160043544_result.resx">
-      <DependentUpon>201912160043544_result.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912161910327_gradeFK.resx">
-      <DependentUpon>201912161910327_gradeFK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912161917596_gradeFKup.resx">
-      <DependentUpon>201912161917596_gradeFKup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912161924443_fkgrade.resx">
-      <DependentUpon>201912161924443_fkgrade.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912181223495_model.resx">
-      <DependentUpon>201912181223495_model.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912191808048_assign.resx">
+      <DependentUpon>201912191808048_assign.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
