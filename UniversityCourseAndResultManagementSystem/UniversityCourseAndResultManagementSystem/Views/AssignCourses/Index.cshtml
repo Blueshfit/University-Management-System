@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<UniversityCourseAndResultManagementSystem.Models.AssignCourse>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All assigned courses";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Show All Assigned Courses</h2>
+<hr />
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
@@ -21,18 +22,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Teacher.TeacherName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreditToBeTaken)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RemainingCredit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CourseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CourseCredit)
-        </th>
         <th></th>
     </tr>
 
@@ -46,18 +35,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Teacher.TeacherName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreditToBeTaken)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RemainingCredit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseCredit)
         </td>
         <td>
             @*@Html.ActionLink("Edit", "Edit", new { id=item.AssignId }) |

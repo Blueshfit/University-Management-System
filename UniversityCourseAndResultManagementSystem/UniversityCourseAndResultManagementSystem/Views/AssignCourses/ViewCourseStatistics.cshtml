@@ -1,0 +1,94 @@
+﻿@model UniversityCourseAndResultManagementSystem.Models.AssignCourse
+
+
+@{
+    ViewBag.Title = "Course Statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Course Statistics</h2>
+
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DepartmentId", null, "--Select Department--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped" id="resultTable">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name/Title</th>
+                    <th>Semester</th>
+                    <th>Assigned To</th>
+                </tr>
+            </thead>
+            <tbody id="courseStat"></tbody>
+        </table>
+
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            $("#DepartmentId").change(function () {
+                var id = $("#DepartmentId").val();
+                var parameter = { deptid: id }
+
+                $("#courseStat").empty();
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCourseStatistics", "AssignCourses")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(parameter),
+                    success: function (courses) {
+                        $.each(courses, function (key, value) {
+                            //$("#CourseId").append('<option value=' + value.Course.CourseId + '>' + value.Course.CourseCode + '</option>');
+
+                            var teacher = value.Teacher.TeacherName;
+                            if (teacher == null) {
+                                teacher = 'Not Assigned Yet';
+                            }
+
+                            $("#courseStat").append(
+                                '<tr>' +
+                                '<td>' + value.Course.CourseCode + '</td>' +
+                                '<td>' + value.Course.CourseName + '</td>' +
+                                '<td>' + value.Course.Semester.SemesterNo + '</td>' +
+                                '<td>' + teacher + '</td>' +
+                                
+                                '</tr>'
+                            )
+
+                         });
+
+                    }
+                });
+
+            });
+        });
+
+
+
+    </script>
+}
+
+

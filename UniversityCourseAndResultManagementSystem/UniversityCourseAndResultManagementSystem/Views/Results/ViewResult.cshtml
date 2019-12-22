@@ -1,7 +1,7 @@
 ﻿@model UniversityCourseAndResultManagementSystem.Models.Result
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "View result of a student";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -51,7 +51,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" value="Make PDF" class="btn btn-success" />
+                <input type="button" onclick="location.href='@Url.Action("ReseultReport", "Results")'" value="Make PDF" class="btn btn-success" />
+                @*<button type="button" onclick="location.href='@Url.Action("ReseultReport", "Results")'" class="btn btn-success" formaction="">Make PDF</button>*@
             </div>
         </div>
 
@@ -116,7 +117,7 @@
                                 $.each(courses, function (key, value) {
                                     $("#CourseId").append('<option value=' + value.Course.CourseId + '>' + value.Course.CourseCode + '</option>');
 
-                                    var grade = value.GradeLetter;
+                                    var grade = value.Grade.GradeLetter;
                                     if (grade == null) {
                                         grade = 'Not Graded Yet';
                                     }

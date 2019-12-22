@@ -13,21 +13,25 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public int AllocationId { get; set; }
 
         [Display(Name = "Department")]
+        [Required(ErrorMessage = "Please select Department")]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
 
         [Display(Name = "Course")]
+        [Required(ErrorMessage = "Please select Course")]
         public int CourseId { get; set; }
-        [ForeignKey("CourseId")]
-        public Course Course { get; set; }
+        //[ForeignKey("CourseId")]
+        public virtual Course Course { get; set; }
 
         [Display(Name = "Room")]
+        [Required(ErrorMessage = "Please select Room")]
         public int RoomId { get; set; }
         [ForeignKey("RoomId")]
         public virtual Room Room { get; set; }
 
         [Display(Name = "Day")]
+        [Required(ErrorMessage = "Please select Day")]
         public int DayId { get; set; }
         [ForeignKey("DayId")]
         public virtual Day Day { get; set; }

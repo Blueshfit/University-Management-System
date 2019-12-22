@@ -13,6 +13,7 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public int EnrollId { get; set; }
 
         [Display(Name = "Student Reg No")]
+        [Required(ErrorMessage = "Please select Student Reg No.")]
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
@@ -23,13 +24,15 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public string Email { get; set; }
 
         public string Department { get; set; }
-
-        [Required(ErrorMessage ="Please select a Course")]
+        
         [Display(Name = "Course")]
+        [Required(ErrorMessage = "Please select a Course")]
         public int CourseId { get; set; }
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
 
         public DateTime Date { get; set; }
+
+        public virtual Result Result { get; set; }
     }
 }

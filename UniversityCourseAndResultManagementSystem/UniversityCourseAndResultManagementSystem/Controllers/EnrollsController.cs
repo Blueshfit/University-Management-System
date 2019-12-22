@@ -44,7 +44,7 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             {
                 if (IsEnrolled(enroll))
                 {
-                    FlashMessage.Danger("Course Already enrolled");
+                    FlashMessage.Danger("This Course is already enrolled");
                     return RedirectToAction("Create");
                 }
 
@@ -64,9 +64,15 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         {
             var enrolledCourses = db.Enrolls.ToList();
             
-            if(enrolledCourses.Any(c => c.CourseId.ToString() == enroll.CourseId.ToString())){
+            //if(enrolledCourses.Any(c => c.CourseId.ToString() == enroll.CourseId.ToString())){
+            //    return true;
+            //}
+
+            if(enrolledCourses.Any(c => (c.CourseId == enroll.CourseId) && (c.StudentId == enroll.StudentId)))
+            {
                 return true;
             }
+
             return false;
         }
 

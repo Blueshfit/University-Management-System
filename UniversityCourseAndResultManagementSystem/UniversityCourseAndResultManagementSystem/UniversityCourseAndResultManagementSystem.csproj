@@ -53,6 +53,9 @@
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -142,29 +145,49 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912210323496_add.cs" />
-    <Compile Include="Migrations\201912210323496_add.designer.cs">
-      <DependentUpon>201912210323496_add.cs</DependentUpon>
+    <Compile Include="Migrations\201912211755503_ToLocal.cs" />
+    <Compile Include="Migrations\201912211755503_ToLocal.designer.cs">
+      <DependentUpon>201912211755503_ToLocal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912210341516_a.cs" />
-    <Compile Include="Migrations\201912210341516_a.designer.cs">
-      <DependentUpon>201912210341516_a.cs</DependentUpon>
+    <Compile Include="Migrations\201912220630197_redundant.cs" />
+    <Compile Include="Migrations\201912220630197_redundant.designer.cs">
+      <DependentUpon>201912220630197_redundant.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912210342404_v.cs" />
-    <Compile Include="Migrations\201912210342404_v.designer.cs">
-      <DependentUpon>201912210342404_v.cs</DependentUpon>
+    <Compile Include="Migrations\201912220654172_notmapped.cs" />
+    <Compile Include="Migrations\201912220654172_notmapped.designer.cs">
+      <DependentUpon>201912220654172_notmapped.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912210416169_g.cs" />
-    <Compile Include="Migrations\201912210416169_g.designer.cs">
-      <DependentUpon>201912210416169_g.cs</DependentUpon>
+    <Compile Include="Migrations\201912220756474_parse.cs" />
+    <Compile Include="Migrations\201912220756474_parse.designer.cs">
+      <DependentUpon>201912220756474_parse.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912210452040_model changed student.cs" />
-    <Compile Include="Migrations\201912210452040_model changed student.designer.cs">
-      <DependentUpon>201912210452040_model changed student.cs</DependentUpon>
+    <Compile Include="Migrations\201912220803306_float.cs" />
+    <Compile Include="Migrations\201912220803306_float.designer.cs">
+      <DependentUpon>201912220803306_float.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912210454292_validation.cs" />
-    <Compile Include="Migrations\201912210454292_validation.designer.cs">
-      <DependentUpon>201912210454292_validation.cs</DependentUpon>
+    <Compile Include="Migrations\201912220905232_virtual.cs" />
+    <Compile Include="Migrations\201912220905232_virtual.designer.cs">
+      <DependentUpon>201912220905232_virtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912221204346_drop FK.cs" />
+    <Compile Include="Migrations\201912221204346_drop FK.designer.cs">
+      <DependentUpon>201912221204346_drop FK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912221210162_virtual room.cs" />
+    <Compile Include="Migrations\201912221210162_virtual room.designer.cs">
+      <DependentUpon>201912221210162_virtual room.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912221626470_grade.cs" />
+    <Compile Include="Migrations\201912221626470_grade.designer.cs">
+      <DependentUpon>201912221626470_grade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912221721034_dropdown validation.cs" />
+    <Compile Include="Migrations\201912221721034_dropdown validation.designer.cs">
+      <DependentUpon>201912221721034_dropdown validation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912221730461_ddl done.cs" />
+    <Compile Include="Migrations\201912221730461_ddl done.designer.cs">
+      <DependentUpon>201912221730461_ddl done.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Allocation.cs" />
@@ -247,9 +270,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\Timepicker\images\Thumbs.db" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -303,6 +331,8 @@
     <Content Include="Views\Results\Delete.cshtml" />
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Results\ViewResult.cshtml" />
+    <Content Include="Views\AssignCourses\ViewCourseStatistics.cshtml" />
+    <Content Include="Views\Allocations\ViewClassSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,23 +351,38 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912210323496_add.resx">
-      <DependentUpon>201912210323496_add.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912211755503_ToLocal.resx">
+      <DependentUpon>201912211755503_ToLocal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912210341516_a.resx">
-      <DependentUpon>201912210341516_a.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912220630197_redundant.resx">
+      <DependentUpon>201912220630197_redundant.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912210342404_v.resx">
-      <DependentUpon>201912210342404_v.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912220654172_notmapped.resx">
+      <DependentUpon>201912220654172_notmapped.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912210416169_g.resx">
-      <DependentUpon>201912210416169_g.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912220756474_parse.resx">
+      <DependentUpon>201912220756474_parse.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912210452040_model changed student.resx">
-      <DependentUpon>201912210452040_model changed student.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912220803306_float.resx">
+      <DependentUpon>201912220803306_float.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912210454292_validation.resx">
-      <DependentUpon>201912210454292_validation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912220905232_virtual.resx">
+      <DependentUpon>201912220905232_virtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912221204346_drop FK.resx">
+      <DependentUpon>201912221204346_drop FK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912221210162_virtual room.resx">
+      <DependentUpon>201912221210162_virtual room.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912221626470_grade.resx">
+      <DependentUpon>201912221626470_grade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912221721034_dropdown validation.resx">
+      <DependentUpon>201912221721034_dropdown validation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912221730461_ddl done.resx">
+      <DependentUpon>201912221730461_ddl done.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

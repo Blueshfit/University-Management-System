@@ -78,6 +78,18 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             return View();
         }
 
+        public ActionResult ReseultReport()
+        {
+            var report = new Rotativa.ActionAsPdf("Index");
+            return report;
+        }
+
+        //public ActionResult GetResultDetails(int studentId)
+        //{
+        //    var courses = db.Enrolls.Where(e => e.StudentId == studentId).ToList();
+        //    return Json(courses, JsonRequestBehavior.AllowGet);
+        //}
+
         public JsonResult GetStudentByStudentId(int studentId)
         {
             var student = db.Students.FirstOrDefault(s => s.StudentId == studentId);
@@ -86,7 +98,8 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
 
         public JsonResult GetEnrolledCoursesByStudentId(int studentId)
         {
-            var courses = db.Enrolls.Where(e => e.StudentId == studentId).ToList();
+            //var courses = db.Enrolls.Where(e => e.StudentId == studentId).ToList();
+            var courses = db.Results.Where(e => e.StudentId == studentId).ToList();
             return Json(courses);
         }
 

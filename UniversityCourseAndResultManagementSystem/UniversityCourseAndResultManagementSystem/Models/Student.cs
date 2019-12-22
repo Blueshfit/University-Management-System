@@ -38,6 +38,7 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public string Address { get; set; }
 
         [Display(Name = "Department")]
+        [Required(ErrorMessage = "Please select Department")]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public virtual Department Department { get; set; }

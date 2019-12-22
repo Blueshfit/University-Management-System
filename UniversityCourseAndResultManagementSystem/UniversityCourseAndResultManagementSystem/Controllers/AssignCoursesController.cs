@@ -56,6 +56,12 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (IsAssigned(assignCourse))
+                {
+                    FlashMessage.Danger("This Course is already assigned!");
+                    return RedirectToAction("Create");
+                }
+
                 db.AssignCourses.Add(assignCourse);
                 await db.SaveChangesAsync();
                 FlashMessage.Confirmation("Course assigned to Teacher successfully");
@@ -66,6 +72,25 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentCode", assignCourse.DepartmentId);
             ViewBag.TeacherId = new SelectList(db.Teachers, "TeacherId", "TeacherName", assignCourse.TeacherId);
             return View(assignCourse);
+        }
+
+        public bool IsAssigned(AssignCourse assign)
+        {
+            //var assignedCourses = db.AssignCourses.ToList();
+
+            //if (assignedCourses.Any(c => (c.CourseId.ToString() == assign.CourseId.ToString()) && (c.TeacherId.ToString() == assign.TeacherId.ToString())))
+            //{
+            //    return true;
+            //}
+
+            var assignedCourses = db.AssignCourses.ToList();
+
+            if (assignedCourses.Any(c => (c.CourseId == assign.CourseId)))
+            {
+                return true;
+            }
+
+            return false;
         }
 
 
@@ -120,6 +145,22 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+
+
+        public ActionResult ViewCourseStatistics()
+        {
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentName");
+            return View("ViewCourseStatistics");
+        }
+        public ActionResult GetCourseStatistics(int deptId)
+        {
+            var courses = db.AssignCourses.Where(t => t.DepartmentId == deptId).ToList();
+            return Json(courses, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {

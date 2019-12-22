@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UniversityCourseAndResultManagementSystem.Models;
+using Vereyon.Web;
 
 namespace UniversityCourseAndResultManagementSystem.Controllers
 {
@@ -37,13 +38,14 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Allocation allocation)
+        public async Task<ActionResult> Create([Bind(Include = "AllocationId,DepartmentId,CourseId,RoomId,DayId,FromTime,ToTime")]Allocation allocation)
         {
             if (ModelState.IsValid)
             {
                 db.Allocations.Add(allocation);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                FlashMessage.Confirmation("Classroom allocated successfully");
+                return RedirectToAction("Create");
             }
 
             ViewBag.DayId = new SelectList(db.Days, "DayId", "DayName", allocation.DayId);
@@ -59,7 +61,20 @@ namespace UniversityCourseAndResultManagementSystem.Controllers
         }
 
 
-       
+        public ActionResult ViewClassSchedule()
+        {
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentName");
+            return View("ViewClassSchedule");
+        }
+
+        public ActionResult GetClassSchedule(int deptId)
+        {
+            var allocatedRooms = db.Allocations.Where(t => t.DepartmentId == deptId).ToList();
+            return Json(allocatedRooms, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
         // GET: Allocations/Delete/5
         public async Task<ActionResult> Delete(int? id)

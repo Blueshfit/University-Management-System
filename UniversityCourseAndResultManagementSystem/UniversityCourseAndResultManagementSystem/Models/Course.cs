@@ -34,11 +34,13 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public string Description { get; set; }
 
         [Display(Name = "Department")]
+        [Required(ErrorMessage ="Please select Department")]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public virtual Department Department { get; set; }
 
         [Display(Name = "Semester")]
+        [Required(ErrorMessage = "Please select Semester")]
         public int SemesterId { get; set; }
         [ForeignKey("SemesterId")]
         public virtual Semester Semester { get; set; }

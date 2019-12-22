@@ -34,11 +34,13 @@ namespace UniversityCourseAndResultManagementSystem.Models
         public string ContactNo { get; set; }
 
         [Display(Name = "Designation")]
+        [Required(ErrorMessage = "Please select Designation")]
         public int DesignationId { get; set; }
         [ForeignKey("DesignationId")]
         public virtual Designation Designation { get; set; }
 
         [Display(Name = "Department")]
+        [Required(ErrorMessage = "Please select Department")]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public virtual Department Department { get; set; }
@@ -46,6 +48,6 @@ namespace UniversityCourseAndResultManagementSystem.Models
         [Display(Name = "Credit to be taken")]
         [Required(ErrorMessage = "Please enter Credit to be taken")]
         [Range(0, 1000, ErrorMessage ="Credit must be Non-Negative")]
-        public string CreditToBeTaken { get; set; }
+        public float CreditToBeTaken { get; set; }
     }
 }
